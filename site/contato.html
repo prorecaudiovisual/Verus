@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contato — Verus Construtora</title>
+<style>
+@font-face {
+  font-family: 'HelveticaNeue';
+  src: url('../Verus%20Identidade%20visual/verus/HelveticaNeue.ttc') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#111111;--charcoal:#1A1A1A;--smoke:#252525;
+  --stone:#6B6B6B;--silver:#9A9A9A;--ash:#E8E8E8;--paper:#F4F4F4;--white:#FFFFFF;
+  --accent:#56D3F2;--accent-dark:#3ab8d8;
+  --font:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --nav-h:76px;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--ink);color:var(--white);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+/* ─── NAV ─── */
+.nav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;padding:0 56px;
+  z-index:200;background:rgba(17,17,17,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,0.05);transition:background .35s;
+}
+.nav.scrolled{background:rgba(17,17,17,0.99)}
+.nav-logo{display:flex;align-items:center}
+.nav-logo img{height:38px;width:auto;display:block}
+.nav-links{display:flex;gap:40px}
+.nav-links a{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--silver);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--accent)}
+.nav-cta{display:inline-block;padding:10px 28px;background:var(--accent);color:var(--ink);font-size:11px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;transition:background .2s,transform .2s}
+.nav-cta:hover{background:var(--accent-dark);transform:translateY(-1px)}
+
+/* ─── CONTACT HERO ─── */
+.contact-hero{
+  background:var(--ink);
+  padding:calc(var(--nav-h) + 80px) 56px 72px;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.contact-hero-canvas{position:absolute;inset:0;pointer-events:none}
+.contact-hero-canvas svg{width:100%;height:100%}
+.contact-hero-inner{position:relative;z-index:2}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:14px;
+  font-size:10px;font-weight:700;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:28px;
+}
+.hero-tag::before{content:'';width:32px;height:1px;background:var(--accent)}
+.hero-title{
+  font-size:clamp(52px,6.5vw,90px);font-weight:900;
+  letter-spacing:-0.035em;text-transform:uppercase;
+  line-height:.88;color:var(--white);margin-bottom:24px;
+}
+.hero-sub{font-size:15px;line-height:1.7;color:var(--stone);max-width:480px}
+
+/* ─── CONTACT SPLIT ─── */
+.contact-split{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:calc(100vh - 280px);
+}
+
+/* LEFT: dark info panel */
+.contact-info{
+  background:var(--charcoal);
+  padding:80px 72px;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:space-between;
+  border-right:1px solid rgba(255,255,255,0.05);
+}
+.contact-info-geo{
+  position:absolute;right:-100px;bottom:-80px;opacity:.04;
+}
+.info-sec-label{
+  font-size:9px;font-weight:700;letter-spacing:0.35em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:40px;
+}
+.info-title{
+  font-size:clamp(32px,3.5vw,48px);font-weight:900;
+  letter-spacing:-0.025em;text-transform:uppercase;
+  line-height:.95;color:var(--white);margin-bottom:64px;
+}
+.info-items{display:flex;flex-direction:column;gap:0}
+.info-item{
+  padding:28px 0;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.info-item:last-child{border-bottom:1px solid rgba(255,255,255,0.06)}
+.info-item-label{
+  font-size:9px;font-weight:700;letter-spacing:0.3em;
+  text-transform:uppercase;color:var(--accent);margin-bottom:10px;
+}
+.info-item-value{
+  font-size:16px;font-weight:600;color:var(--white);
+  line-height:1.5;
+}
+.info-item-value a{color:var(--ash);transition:color .2s}
+.info-item-value a:hover{color:var(--accent)}
+.info-hours-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 20px}
+.info-hours-grid span:nth-child(odd){color:var(--stone);font-size:13px;font-weight:500}
+.info-hours-grid span:nth-child(even){font-size:13px;color:var(--ash)}
+.info-socials{
+  display:flex;gap:10px;margin-top:48px;
+}
+.info-socials a{
+  width:40px;height:40px;border:1px solid rgba(255,255,255,0.12);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--stone);transition:all .2s;
+}
+.info-socials a:hover{border-color:var(--accent);color:var(--accent)}
+
+/* RIGHT: white form panel */
+.contact-form-panel{
+  background:var(--paper);
+  padding:80px 72px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.form-header{margin-bottom:48px}
+.form-label{
+  font-size:9px;font-weight:700;letter-spacing:0.35em;
+  text-transform:uppercase;color:var(--stone);margin-bottom:14px;
+}
+.form-title{
+  font-size:clamp(28px,2.8vw,40px);font-weight:900;
+  letter-spacing:-0.02em;text-transform:uppercase;
+  color:var(--ink);line-height:1;
+}
+.form{display:flex;flex-direction:column;gap:0}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+.form-field{
+  display:flex;flex-direction:column;
+  margin-bottom:1px;
+}
+.form-field label{
+  font-size:9px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--stone);padding:16px 20px 0;background:var(--white);
+}
+.form-field input,
+.form-field select,
+.form-field textarea{
+  font-family:var(--font);font-size:15px;font-weight:500;color:var(--ink);
+  background:var(--white);border:none;outline:none;
+  padding:8px 20px 18px;
+  border-bottom:2px solid transparent;
+  transition:border-color .25s;
+  -webkit-appearance:none;appearance:none;
+  resize:none;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus{border-bottom-color:var(--accent)}
+.form-field textarea{min-height:140px;padding-top:12px}
+.form-field-full{grid-column:1/-1}
+.form-row .form-field{border-right:1px solid var(--ash)}
+.form-row .form-field:last-child{border-right:none}
+.form-select-wrap{position:relative}
+.form-select-wrap::after{
+  content:'↓';position:absolute;right:20px;bottom:18px;
+  font-size:12px;color:var(--stone);pointer-events:none;
+}
+.form-submit{
+  margin-top:2px;
+  padding:20px 48px;
+  background:var(--ink);color:var(--white);
+  font-family:var(--font);font-size:11px;font-weight:700;
+  letter-spacing:0.18em;text-transform:uppercase;
+  border:none;cursor:pointer;
+  transition:background .25s,transform .25s;
+  align-self:flex-start;
+}
+.form-submit:hover{background:var(--charcoal);transform:translateY(-2px)}
+.form-note{
+  font-size:12px;color:var(--stone);margin-top:20px;line-height:1.5;
+}
+
+/* ─── MAP PLACEHOLDER ─── */
+.map-section{
+  height:400px;position:relative;overflow:hidden;
+  background:var(--charcoal);
+  display:flex;align-items:center;justify-content:center;
+}
+.map-bg{
+  position:absolute;inset:0;
+  background:var(--ink);
+  overflow:hidden;
+}
+.map-bg img{
+  width:100%;height:100%;object-fit:cover;object-position:center 40%;
+  filter:grayscale(30%);opacity:0.5;
+}
+.contact-info-photo{
+  position:absolute;inset:0;overflow:hidden;z-index:0;
+}
+.contact-info-photo img{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  filter:grayscale(40%);opacity:0.18;
+}
+.contact-info>div,.info-socials{position:relative;z-index:1}
+.map-pattern{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.04) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.map-overlay{
+  position:relative;z-index:2;
+  text-align:center;
+}
+.map-icon{
+  width:48px;height:48px;margin:0 auto 20px;
+  color:rgba(255,255,255,0.4);
+}
+.map-address{
+  font-size:13px;font-weight:600;letter-spacing:0.08em;
+  color:var(--silver);text-transform:uppercase;
+}
+.map-link{
+  display:inline-block;margin-top:16px;
+  padding:10px 28px;border:1px solid rgba(255,255,255,0.2);
+  font-size:10px;font-weight:700;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--white);
+  transition:border-color .2s;
+}
+.map-link:hover{border-color:rgba(255,255,255,.6)}
+
+/* ─── FOOTER ─── */
+footer{background:#0A0A0A;padding:88px 56px 52px;border-top:1px solid rgba(255,255,255,0.05)}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:72px;margin-bottom:72px}
+.footer-brand-logo{display:flex;align-items:center;margin-bottom:24px}
+.footer-brand-logo img{height:44px;width:auto;display:block}
+.footer-tagline{font-size:14px;line-height:1.7;color:var(--stone);max-width:280px}
+.footer-col h4{font-size:9px;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;color:var(--stone);margin-bottom:28px}
+.footer-col ul li{margin-bottom:14px}
+.footer-col ul a{font-size:14px;color:var(--ash);transition:color .2s}
+.footer-col ul a:hover{color:var(--white)}
+.footer-col address{font-style:normal}
+.footer-col address p{font-size:14px;color:var(--stone);line-height:1.7;margin-bottom:6px}
+.footer-col address a{color:var(--ash);transition:color .2s}
+.footer-col address a:hover{color:var(--white)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;border-top:1px solid rgba(255,255,255,0.05);padding-top:40px}
+.footer-copy{font-size:12px;color:var(--stone);letter-spacing:0.04em}
+.footer-socials{display:flex;gap:12px}
+.footer-socials a{width:38px;height:38px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:var(--stone);transition:border-color .2s,color .2s}
+.footer-socials a:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ─── ANIMATIONS ─── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+.reveal-d1{transition-delay:.1s}
+.reveal-d2{transition-delay:.2s}
+.reveal-d3{transition-delay:.3s}
+
+/* Success message */
+.form-success{
+  display:none;padding:16px 20px;
+  background:rgba(255,255,255,0.06);
+  border-left:3px solid var(--ink);
+  font-size:13px;color:var(--ink);
+  font-weight:600;margin-top:16px;
+}
+.form-success.show{display:block}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px){
+  .contact-split{grid-template-columns:1fr}
+  .contact-info{border-right:none;border-bottom:1px solid rgba(255,255,255,0.05)}
+  .contact-info-geo{display:none}
+}
+@media(max-width:800px){
+  .contact-form-panel{padding:56px 32px}
+  .contact-info{padding:56px 32px}
+  .form-row{grid-template-columns:1fr}
+  .form-row .form-field{border-right:none}
+  .footer-grid{grid-template-columns:1fr}
+}
+@media(max-width:700px){
+  .nav{padding:0 20px}
+  .nav-links{display:none}
+  .contact-hero{padding:calc(var(--nav-h) + 48px) 24px 56px}
+  footer{padding:60px 24px 40px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="nav" id="navbar">
+  <a href="index.html" class="nav-logo">
+    <img src="../Verus%20Identidade%20visual/verus/LOGOS%20PNG/LOGO_VERUS_FULL.png" alt="Verus Construtora">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="contato.html" class="active">Contato</a></li>
+  </ul>
+  <a href="contato.html" class="nav-cta">Solicitar Orçamento</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<header class="contact-hero">
+  <div class="contact-hero-canvas">
+    <svg viewBox="0 0 1440 380" preserveAspectRatio="xMidYMid slice" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="720" y1="-10" x2="0" y2="390" stroke="white" stroke-width="0.5" opacity="0.04"/>
+      <line x1="720" y1="-10" x2="1440" y2="390" stroke="white" stroke-width="0.5" opacity="0.04"/>
+      <polygon points="720,20 1320,370 120,370" fill="none" stroke="white" stroke-width="0.5" opacity="0.03"/>
+      <line x1="1300" y1="0" x2="1440" y2="0" stroke="white" stroke-width="0.8" opacity="0.07"/>
+      <line x1="1440" y1="0" x2="1440" y2="120" stroke="white" stroke-width="0.8" opacity="0.07"/>
+    </svg>
+  </div>
+  <div class="contact-hero-inner">
+    <div class="hero-tag reveal">Fale Conosco</div>
+    <h1 class="hero-title reveal reveal-d1">Vamos<br>Construir<br>Juntos</h1>
+    <p class="hero-sub reveal reveal-d2">Conte-nos sobre seu projeto. Nossa equipe retorna em até 24 horas com uma análise personalizada.</p>
+  </div>
+</header>
+
+<!-- ═══ CONTACT SPLIT ═══ -->
+<section class="contact-split">
+
+  <!-- LEFT: INFO PANEL -->
+  <div class="contact-info">
+    <div class="contact-info-photo">
+      <img src="../Sess%C3%A3o%20de%20fotos%20Verus/2.png" alt="">
+    </div>
+    <div>
+      <p class="info-sec-label reveal">Informações</p>
+      <h2 class="info-title reveal reveal-d1">Entre em<br>Contato</h2>
+      <div class="info-items">
+        <div class="info-item reveal reveal-d1">
+          <p class="info-item-label">E-mail</p>
+          <p class="info-item-value"><a href="mailto:contato@verus.com.br">contato@verus.com.br</a></p>
+        </div>
+        <div class="info-item reveal reveal-d2">
+          <p class="info-item-label">Telefone / WhatsApp</p>
+          <p class="info-item-value"><a href="tel:+551199999999">(11) 9 9999-9999</a></p>
+        </div>
+        <div class="info-item reveal reveal-d2">
+          <p class="info-item-label">Endereço</p>
+          <p class="info-item-value">Rua das Construções, 100<br>Bela Vista — São Paulo, SP<br>CEP 01310-100</p>
+        </div>
+        <div class="info-item reveal reveal-d3">
+          <p class="info-item-label">Horário de Atendimento</p>
+          <div class="info-item-value">
+            <div class="info-hours-grid">
+              <span>Seg – Sex</span><span>08:00 – 18:00</span>
+              <span>Sábado</span><span>09:00 – 13:00</span>
+              <span>Domingo</span><span>Fechado</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="info-socials reveal">
+      <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="8" x2="8" y2="8.01"/><path d="M12 16v-5M12 13a2 2 0 0 1 4 0v3"/></svg></a>
+      <a href="#" aria-label="WhatsApp"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+    </div>
+  </div>
+
+  <!-- RIGHT: FORM PANEL -->
+  <div class="contact-form-panel">
+    <div class="form-header reveal">
+      <p class="form-label">Solicite um Orçamento</p>
+      <h2 class="form-title">Conte-nos<br>sobre o projeto</h2>
+    </div>
+    <form class="form" id="contactForm" novalidate>
+      <div class="form-row reveal reveal-d1">
+        <div class="form-field">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" placeholder="João Silva" required autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" placeholder="joao@email.com" required autocomplete="email">
+        </div>
+      </div>
+      <div class="form-row reveal reveal-d2">
+        <div class="form-field">
+          <label for="telefone">Telefone</label>
+          <input type="tel" id="telefone" name="telefone" placeholder="(11) 9 9999-9999" autocomplete="tel">
+        </div>
+        <div class="form-field">
+          <label for="servico">Tipo de serviço</label>
+          <div class="form-select-wrap">
+            <select id="servico" name="servico" required>
+              <option value="" disabled selected>Selecione…</option>
+              <option value="residencial">Construção Residencial</option>
+              <option value="comercial">Construção Comercial</option>
+              <option value="reforma">Reforma & Acabamentos</option>
+              <option value="consultoria">Consultoria Técnica</option>
+              <option value="outro">Outro</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-field form-field-full reveal reveal-d2">
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" name="mensagem" placeholder="Descreva seu projeto: localização, metragem estimada, prazo desejado, orçamento aproximado…" required></textarea>
+      </div>
+      <button type="submit" class="form-submit reveal reveal-d3">Enviar Mensagem →</button>
+      <div class="form-success" id="formSuccess">
+        Mensagem enviada com sucesso. Retornaremos em até 24h.
+      </div>
+      <p class="form-note reveal reveal-d3">Seus dados são tratados com total confidencialidade e nunca serão compartilhados com terceiros.</p>
+    </form>
+  </div>
+
+</section>
+
+<!-- ═══ MAP ═══ -->
+<div class="map-section">
+  <div class="map-bg">
+    <img src="../Sess%C3%A3o%20de%20fotos%20Verus/5.png" alt="Localização Verus">
+  </div>
+  <div class="map-overlay">
+    <svg class="map-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+    <p class="map-address">Rua das Construções, 100 — Bela Vista, São Paulo</p>
+    <a href="#" class="map-link">Abrir no Maps →</a>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo">
+        <img src="../Verus%20Identidade%20visual/verus/LOGOS%20PNG/LOGO_VERUS_FULL.png" alt="Verus Construtora">
+      </div>
+      <p class="footer-tagline">Construindo com precisão e propósito há mais de 15 anos. Excelência técnica em cada detalhe.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contato.html">Contato</a></li>
+        <li><a href="contato.html">Orçamento</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <address>
+        <p><a href="mailto:contato@verus.com.br">contato@verus.com.br</a></p>
+        <p><a href="tel:+551199999999">(11) 9 9999-9999</a></p>
+        <p>Rua das Construções, 100<br>São Paulo — SP, 01310-100</p>
+      </address>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2024 Verus Construtora. Todos os direitos reservados.</span>
+    <div class="footer-socials">
+      <a href="#" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="3"/><line x1="8" y1="11" x2="8" y2="16"/><line x1="8" y1="8" x2="8" y2="8.01"/><path d="M12 16v-5M12 13a2 2 0 0 1 4 0v3"/></svg></a>
+      <a href="#" aria-label="WhatsApp"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal animations
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)} });
+  }, { threshold: 0.06, rootMargin:'0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Navbar scroll
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60), { passive: true });
+
+  // Phone mask
+  document.getElementById('telefone').addEventListener('input', function(){
+    let v = this.value.replace(/\D/g,'');
+    if(v.length <= 11){
+      v = v.replace(/^(\d{2})(\d)/,'($1) $2');
+      v = v.replace(/(\d{5})(\d)/,'$1-$2');
+    }
+    this.value = v;
+  });
+
+  // Form submit
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = 'Enviando…';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Enviado ✓';
+      document.getElementById('formSuccess').classList.add('show');
+      this.reset();
+    }, 1400);
+  });
+</script>
+</body>
+</html>

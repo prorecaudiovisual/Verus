@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(New-Item -ItemType Directory -Force -Path \"C:\\\\Users\\\\thiag\\\\OneDrive\\\\Área de Trabalho\\\\Verus\\\\site\")",
+      "Bash(Out-Null)",
+      "Bash(Write-Output \"OK\")"
+    ]
+  }
+}
